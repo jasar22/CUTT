@@ -1,2 +1,1 @@
-# CUTT
-free
+Free
