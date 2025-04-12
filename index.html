@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Text Buttons</title>
+    <style>
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: DimGray;
+            border: 1px solid #560b0b;
+            cursor: pointer;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #ccc;
+            color: black;
+        }
+
+        body {
+            background-color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #copiedMsg {
+            color: lightgreen;
+            font-size: 18px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button onclick="copyText(text1)">1. Working with Decision tree</button>
+    <button onclick="copyText(text2)">1b. Rule based model</button>
+    <button onclick="copyText(text3)">1c. Probabilistic Reasoning</button>
+    <button onclick="copyText(text4)">2. Binary classification using logistic regression</button>
+    <button onclick="copyText(text5)">2b. Implement binary classification Logistic Regression BreastC</button>
+    <button onclick="copyText(text6)">3. Imbalanced Classification SMOTE and without SMOTE</button>
+    <button onclick="copyText(text7)">3b. Python program for confusion matrix</button>
+    <button onclick="copyText(text8)">3c. Probability estimation using logistic regression</button>
+
+    <p id="copiedMsg">Copied!</p>
+
+    <script>
+        var text1 = `1a. Your full Decision Tree code here...`;
+        var text2 = `1b. Your full Rule Based Model code here...`;
+        var text3 = `1c. Your full Probabilistic Reasoning code here...`;
+        var text4 = `2a. Your full Logistic Regression code here...`;
+        var text5 = `2b. Your full Breast Cancer Logistic Regression code here...`;
+        var text6 = `3a. Your full SMOTE example code here...`;
+        var text7 = `3b. Your full Confusion Matrix code here...`;
+        var text8 = `3c. Your full Probability Estimation code here...`;
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const msg = document.getElementById("copiedMsg");
+                msg.style.display = "block";
+                setTimeout(() => {
+                    msg.style.display = "none";
+                }, 1500);
+            }).catch(err => {
+                alert('Failed to copy text: ', err);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
