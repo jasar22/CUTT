@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Text Buttons</title>
+    <style>
+        button {
+            margin: 5px;
+        }
+
+        body {
+            background-color: black;
+            /* Light gray background */
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: DimGray;
+            /* Light gray button background */
+            border: 1px solid #560b0b;
+            /* Dark gray border */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ccc;
+          /* Slightly darker background on hover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <button onclick="copyText(text1)">1.Working with Decision tree</button>
+    <button onclick=" copyText(text2)">1b.Rule based model</button>
+    <button onclick="copyText(text3)">1c.Probabilistic Reasoning</button>
+    <button onclick="copyText(text4)">2.Binary classification using logistic regression</button>
+    <button onclick="copyText(text5)">2b.  Implement binary classification Logistic Regression BreastC  </button>
+    <button onclick="copyText(text6)">3 Imbalanced Classification SMOTE and without SMOTE </button>
+    <button onclick="copyText(text7)">3b.Python program for confusion matrix </button>
+    <button onclick="copyText(text8)">3c.probability estimation using logistic regression</button>
+    <button onclick="copyText(text9)">3d.Train a logistic regression model to predict the probability of passing an exam</button>
+    <button onclick="copyText(text10)">3e.Train a multinomial logistic regression model using the Iris dataset </button>
+    <button onclick="copyText(text11)">4.Underfitting using linear regression </button>
+    <button onclick="copyText(text12)">5.Overfitting Code </button>
+    <button onclick="copyText(text13)">6.polynomial regression </button>  
+    <button onclick="copyText(text14)">6b.Stock price prediction using Polynomial Regression</button>
+    <button onclick="copyText(text15)">7a.significance threshold for correlated hypotheses  </button>
+    <button onclick="copyText(text16)">7b.Analyzing Stock Indicators: Moving Averages, Momentum, Volatility </button>
+    <button onclick="copyText(text17)">8.Working with KMeans Clustering  </button>
+    <button onclick="copyText(text18)">9.Hierarchical Clustering  </button>
+    <button onclick="copyText(text19)">10.Apriori Algorithm - Market Basket Analysis</button>
+
+
+   
+    <p id="copiedMsg"></p>
+    <script>
+        var text1 = `1a
+    #import libraries
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+from sklearn.tree import plot_tree
+
+
+#Step 2 Load Dataset
+iris=load_iris()
+X=iris.data #Features
+y=iris.target #label
+
+
+#Step 3 Split the data into training and testing sets
+X_train, X_test, y_train, y_test=train_test_split(X, y, test_size=0.2)
+
+
+#Step 4 Initialize the decision tree classifier
+z=DecisionTreeClassifier(max_depth=3, random_state=42)
+z.fit(X_train, y_train)
+
+
+#Step 5 Predict the model(test set)
+y_pred=z.predict(X_test)
+accuracy=accuracy_score(y_test, y_pred)
+print("Accuracy Score: ",accuracy)
+
+
+#Step 6 Visualization
+plt.figure(figsize=(12,8))
+plot_tree(z, feature_names=iris.feature_names, class_names=iris.target_names, filled=True)
+plt.suptitle("Decision Tree ")
+plt.show()
+
+
+
+
+
+
+    `;
+        var text2 = `1b
+        # Step 1 Import libraries
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+
+#Step 2 Load Iris Dataset
+iris=load_iris()
+X=iris.data #Features
+y=iris.target #label
+
+
+#Step 3 Split the data into training and testing sets
+X_train, X_test, y_train, y_test=train_test_split(X, y, test_size=0.2)
+
+
+#Step 4 Rule Based Classifier Function
+def rule_based_classifier(features):
+  petal_length=features[2]
+  petal_width=features[3]
+  if petal_length<2.5:
+    return 0
+  elif petal_length>1.8:
+    return 1
+  else:
+    return 2
+y_pred=[rule_based_classifier(sample) for sample in X_test]
+
+
+#Evaluate the model
+accuracy = accuracy_score(y_pred,y_test)
+print("Accuracy:", accuracy)
+
+
+
+`;
+
+        var text3 = `1c
+        #Import Libraries
+import random
+import numpy as np
+from collections import Counter
+
+
+num_rolls = 100
+die_face = [1,2,3,4,5,6]
+
+
+rolls = [random.choice(die_face) for _ in range(num_rolls)]
+
+
+roll_count = Counter(rolls)
+
+
+probs = {face:count/num_rolls for face, count in roll_count.items()}
+
+
+print("Observed Probabilities:")
+
+
+for face, prob in probs.items():
+  print(f"Probability of {face}: {prob:.2f}")
+
+
+even_face = [2,4,6]
+
+
+even_rolls = sum(roll_count [face] for face in even_face)
+prob_even = even_rolls/num_rolls
+
+
+print(f"\nEven Number probability: {prob_even:.2f}")
+
+
+print(f"Odd Number probability:  {1-prob_even:.2f}")
+
+
+print("\nTheoritical Probabilities")
+theo_prob = {face:1/6 for face in die_face}
+for face, prob in theo_prob.items():
+  print(face, prob)
+
+`;
+
+        var text4 = `2a
+        # step 1 : import required libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
+
+
+# step 2 : load the dataset {uploading the csv}
+file_path ="diabetes.csv"
+columns = ["Pregnancies","Glucose","BloodPressure","SkinThickness","Insulin","BMI","DiabetesPedigreeFunction","Age","Outcome"]
+df = pd.read_csv(file_path,names= columns)
+
+
+# step 3 : data exploration
+print(df.head()) #first 5 values in table
+print(df.tail()) #last 5 values in table
+print("Dataset info", df.info()) #info will give the missing values, then we can clean the missing values
+
+
+# step 4 : data pre-processing
+df['Pregnancies'] = pd.to_numeric(df['Pregnancies'], errors='coerce')
+# If there are still non-numeric values after conversion, you might choose to drop those rows
+df = df.dropna()
+x = df.drop("Outcome",axis=1)
+y = df["Outcome"]
+x = df.drop("Outcome",axis=1) #this x will have all the features
+y = df["Outcome"]
+
+
+# step 5 : split the tdata in training and testing data 80% &20% respectively
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42)
+
+
+# step 6 : standadrize the feauture value- feature transformation
+scaler = StandardScaler()
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test)
+
+
+# step 7: apply the model
+model = LogisticRegression()
+model.fit(x_train,y_train)
+y_pred = model.predict(x_test)
+
+
+# setp 8: Model evaluation
+accuracy = accuracy_score(y_test,y_pred)
+conf_matrix = confusion_matrix(y_test,y_pred)
+class_report = classification_report(y_test,y_pred)
+
+
+# step 9 : Report
+print("Accuracy:",accuracy)
+print("Confusion Matrix:\n",conf_matrix)
+print("Classification Report:\n",class_report)
+
+
+# step 10 : data vizualization
+plt.figure(figsize=(8,6))
+sns.heatmap(conf_matrix,annot=True,fmt="d",cmap="Blues",xticklabels=["No Diabetes","Diabetes"],yticklabels=["No Diabetes","Diabetes"])
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.title("Confusion Matrix")
+plt.show()
+
+
+   
+`;
+
+        var text5 = `2b
+        import matplotlib.pyplot as plt
+from sklearn.datasets import load_breast_cancer
+dataset = load_breast_cancer(as_frame= True)
+print('Dataset: \n',dataset['data'].head())
+print('Target: \n',dataset['target'].head())
+print('Calculate the count of 0 and 1: \n',dataset['target'].value_counts())
+
+
+X = dataset['data']
+y = dataset['target']
+
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.25, random_state=0)
+
+
+#How do we avoid data leakage: by transforming the data using standard scalar
+from sklearn.preprocessing import StandardScaler
+ss = StandardScaler()
+X_train = ss.fit_transform(X_train)
+X_test = ss.transform(X_test)
+
+
+from sklearn.linear_model import LogisticRegression
+lr = LogisticRegression()
+lr.fit(X_train, y_train)
+y_pred = lr.predict(X_test)
+
+
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy: ", accuracy)
+
+
+from sklearn.metrics import confusion_matrix
+cn = confusion_matrix(y_test, y_pred)
+tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+print("True Negative: ", tn)
+print("False Positive: ", fp)
+print("False Negative: ", fn)
+print("True Positive: ", tp)
+
+
+#Accuracy: (correct_prediction)/(total_no_of_dataset)
+acc = (tn + tp) / (tn+ tp+ fn + fp)
+print("Accuracy (custom): ",acc)
+print("-----Surabhi Maydeo 021------")
+
+
+       
+  `;
+ 
+        var text6 = `3a
+       #Imbalanced Classification
+#Step 1: Importing libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
+from imblearn.over_sampling import SMOTE
+
+
+print("------------Before applying SMOTE Technique-------------")
+#Step 2: Creating an imbalance dataset
+X,y = make_classification(n_samples=5000,n_features=10,n_classes=2,weights=[0.95,0.05],random_state=42)
+#check class distribution
+print(pd.Series(y).value_counts(normalize=True))
+
+
+#Step 3: Split the dataset
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=42)
+
+
+#Step 4: Train the model
+rf = RandomForestClassifier(random_state=42)
+rf.fit(X_train,y_train)
+
+
+#Step 5: Predict the model
+y_pred = rf.predict(X_test)
+
+
+#Step 6: Evaluate the model
+accuracy = accuracy_score(y_test,y_pred)
+conf_matrix = confusion_matrix(y_test,y_pred)
+class_report = classification_report(y_test,y_pred)
+print("Accuracy:",accuracy)
+print("Confusion Matrix:\n",conf_matrix)
+print("Classification Report:\n",class_report)
+
+
+print("-------------Applying SMOTE Technique-------------")
+smote = SMOTE(sampling_strategy='auto',random_state=42)
+X_train_resampled,y_train_resampled = smote.fit_resample(X_train,y_train)
+#Let's check the new class distribution
+print("Resampled dataset:\n", pd.Series(y_train_resampled).value_counts(normalize=True))
+
+
+#Train the model
+rf = RandomForestClassifier(random_state=42)
+rf.fit(X_train_resampled,y_train_resampled)
+
+
+#Predict the model
+y_pred_sample = rf.predict(X_test)
+
+
+#Evaluate the model
+accuracy = accuracy_score(y_test,y_pred_sample)
+conf_matrix = confusion_matrix(y_test,y_pred_sample)
+print("Accuracy:",accuracy)
+print("Confusion Matrix:\n",conf_matrix)
+print("Classification Report:\n",classification_report(y_test,y_pred_sample))
+`;
+
+        var text7 = `3b
+       #Example 1 of confusion matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+
+
+#Sample dataset
+y_actual = [1,0,1,1,0,0,1,0,0,1]
+y_predicted = [1,0,0,1,0,0,1,1,0,1]
+
+
+#Lets compute the confusion matrix
+cn = confusion_matrix(y_actual,y_predicted)
+print(cn)
+
+
+#Plotting the confusion matrix
+sns.heatmap(cn,annot=True,fmt='d',cmap='Blues',xticklabels=['Present','Absent'],yticklabels=['Present','Absent'])
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix - Surabhi Maydeo')
+plt.show()
+
+
+#Accuracy
+accuracy = (cn[0,0]+cn[1,1])/(cn[0,0]+cn[0,1]+cn[1,0]+cn[1,1])
+print("Accuracy: ",accuracy)
+
+
+#Precision
+precision = cn[1,1]/(cn[0,1]+cn[1,1])
+print("Precision: ",precision)
+
+
+#Recall
+recall = cn[1,1]/(cn[1,0]+cn[1,1])
+print("Recall: ",recall)
+
+
+    `;
+
+    var text8 = `3c
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+
+def logistic_regression_probability_estimation(X, y):
+
+
+    # Split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
+
+
+    # Create and train the logistic regression model
+    model = LogisticRegression()
+    model.fit(X_train, y_train)
+
+
+    # Predict class labels
+    y_pred = model.predict(X_test)
+
+
+    # Calculate accuracy
+    accuracy = accuracy_score(y_test, y_pred)
+    print("Accuracy:", accuracy)
+
+
+    # Calculate confusion matrix
+    cn = confusion_matrix(y_test, y_pred)
+    print("\nConfusion Matrix:\n", cn)
+
+
+    #Plotting the confusion matrix
+    sns.heatmap(cn,annot=True,fmt='d',cmap='Blues',xticklabels=['Negative','Positive'],yticklabels=['Negative','Positive'])
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.title('Confusion Matrix - Logistic Regression')
+    plt.show()
